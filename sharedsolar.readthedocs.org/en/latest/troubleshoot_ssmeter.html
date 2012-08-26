@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/troubleshoot_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:55 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>Troubleshooting at the Meter &mdash; SharedSolar Technical .1 documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="../../../ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sharedsolar";
+  </script>
+  <script type="text/javascript" src="../../../media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="SharedSolar Technical .1 documentation" href="index.html" />
+    <link rel="prev" title="FAQ: SSMeter" href="faq_ssmeter.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq_ssmeter.html" title="FAQ: SSMeter"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="troubleshooting-at-the-meter">
+<h1>Troubleshooting at the Meter<a class="headerlink" href="#troubleshooting-at-the-meter" title="Permalink to this headline">¶</a></h1>
+<p>Described below are some common cases encountered at the meter.</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#the-ssmeter-service-is-running-but-messages-are-not-getting-through-to-the-meter">The SSMeter service is running but messages are not getting through to the meter.</a></li>
+<li><a class="reference internal" href="#the-ssmeter-service-is-running-but-messages-are-not-being-sent-from-the-meter">The SSMeter service is running but messages are not being sent from the meter.</a></li>
+<li><a class="reference internal" href="#the-meter-is-running-was-sending-receiving-messages-but-i-m-not-sure-anymore-because-the-last-messages-occurred-sometime-ago-how-can-i-confirm-if-it-s-still-running-ok">The meter is running, was sending/receiving messages but I&#8217;m not sure anymore because the last messages occurred sometime ago. How can I confirm if it&#8217;s still running OK?</a></li>
+<li><a class="reference internal" href="#i-can-see-the-sms-message-queued-up-and-being-sent-out-but-i-don-t-see-them-arriving-at-the-gateway-what-do-i-do">I can see the SMS message queued up and being sent out, but I don&#8217;t see them arriving at the Gateway. What do I do?</a></li>
+<li><a class="reference internal" href="#the-credit-on-a-circuit-is-slowly-depleting-with-no-apparent-load-drawn-aka-sc20-reporting-use-without-any-load">The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).</a></li>
+<li><a class="reference internal" href="#i-cannot-ssh-into-the-meter-and-keep-getting-a-host-key-not-recognized-message-what-do-i-do">I cannot ssh into the meter and keep getting a &#8220;host key not recognized&#8221; message. What do I do?</a></li>
+<li><a class="reference internal" href="#the-clock-on-the-sheevaplug-is-way-off-how-can-i-set-it-to-the-current-date-time">The clock on the SheevaPlug is way off. How can I set it to the current date/time?</a></li>
+<li><a class="reference internal" href="#i-cannot-connect-to-the-sheevaplug-via-the-intranet-but-i-can-using-the-serialport">I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.</a></li>
+<li><a class="reference internal" href="#network-messaging-troubleshooting-diagram">Network/Messaging troubleshooting diagram.</a></li>
+</ol>
+<div class="section" id="the-ssmeter-service-is-running-but-messages-are-not-getting-through-to-the-meter">
+<h2>The SSMeter service is running but messages are not getting through to the meter.<a class="headerlink" href="#the-ssmeter-service-is-running-but-messages-are-not-getting-through-to-the-meter" title="Permalink to this headline">¶</a></h2>
+<p>Send a text message from a phone to the meter and check the SMS Logs page on the webmin to see if it arrives. Give it 5 minutes.</p>
+<p>In case it does arrive, then double-check that the Gateway indeed sent out the message. If the message was sent, then check the aggregator/telco logs to see where it is in the chain.</p>
+</div>
+<div class="section" id="the-ssmeter-service-is-running-but-messages-are-not-being-sent-from-the-meter">
+<h2>The SSMeter service is running but messages are not being sent from the meter.<a class="headerlink" href="#the-ssmeter-service-is-running-but-messages-are-not-being-sent-from-the-meter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Make sure the modem&#8217;s associated with the network - the Telit&#8217;s LED should be blinking at 3 second intervals.</li>
+<li>Check the Webmin&#8217;s SMS Logs page and confirm that the queued messages are indeed being sent to the modem, instead of being stuck at a particular one.</li>
+<li>If messages are being sent out to the modem from the queue, make sure the SIM card has credit on it.</li>
+</ul>
+</div>
+<div class="section" id="the-meter-is-running-was-sending-receiving-messages-but-i-m-not-sure-anymore-because-the-last-messages-occurred-sometime-ago-how-can-i-confirm-if-it-s-still-running-ok">
+<h2>The meter is running, was sending/receiving messages but I&#8217;m not sure anymore because the last messages occurred sometime ago. How can I confirm if it&#8217;s still running OK?<a class="headerlink" href="#the-meter-is-running-was-sending-receiving-messages-but-i-m-not-sure-anymore-because-the-last-messages-occurred-sometime-ago-how-can-i-confirm-if-it-s-still-running-ok" title="Permalink to this headline">¶</a></h2>
+<p>Send a text message from your phone directly to the meter, with the content of the SMS being <tt class="docutils literal"><span class="pre">hello</span> <span class="pre">meter</span></tt>. If the meter/modem is functioning, then you should receive a response SMS containing <tt class="docutils literal"><span class="pre">hello</span> <span class="pre">&lt;your_phone_number&gt;</span></tt>.</p>
+</div>
+<div class="section" id="i-can-see-the-sms-message-queued-up-and-being-sent-out-but-i-don-t-see-them-arriving-at-the-gateway-what-do-i-do">
+<h2>I can see the SMS message queued up and being sent out, but I don&#8217;t see them arriving at the Gateway. What do I do?<a class="headerlink" href="#i-can-see-the-sms-message-queued-up-and-being-sent-out-but-i-don-t-see-them-arriving-at-the-gateway-what-do-i-do" title="Permalink to this headline">¶</a></h2>
+<p>The point of failure might lie either with the <em>localsms</em> solution or the <em>kannel</em> server.</p>
+<ul>
+<li><p class="first">From the Webmin&#8217;s Meter Configuration webpage, change the Gateway&#8217;s phone number to your personal cellphone.</p>
+<ul class="simple">
+<li>Send a text message from your cellphone to the Meter. Confirm the message arrival by checking the SMS Logs on the Webmin</li>
+<li>Restart the SSMeter service. This will send a notification from the Meter to your phone.</li>
+</ul>
+<p>If both the above tests pass, contact <em>sharedsolar-tech&#64;googlegroups.com</em> and ask to check the <em>localsms</em> and <em>kannel</em> solutions.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="the-credit-on-a-circuit-is-slowly-depleting-with-no-apparent-load-drawn-aka-sc20-reporting-use-without-any-load">
+<h2>The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).<a class="headerlink" href="#the-credit-on-a-circuit-is-slowly-depleting-with-no-apparent-load-drawn-aka-sc20-reporting-use-without-any-load" title="Permalink to this headline">¶</a></h2>
+<p>Thanks to MichaelBenedict for the question and MattBasinger for the response.</p>
+<p>The first thing is to verify there is indeed absolutely no load and that this is for sure a software issue:</p>
+<p>Monitor the &#8220;power&#8221; from the webmin with the household circuit activated (CB at the house) and the lights on and any other applicable load on? What is this load at the SC20 via the webmin?</p>
+<p>When you turn off the breaker at the household - what is the residual load you are trying to identify?  (how many watts)</p>
+<p>Or if you can&#8217;t access the &#8220;power&#8221; (watts) via the current version of the webmin you have - then just watch the watthours decrease over a several minute period, time it, and calculate the power.</p>
+<p>Also, use the current clamp (orange) multimeter that ivan brought you... with the household breaker turned off, put the multimeter clamp around the hot wire in the enclosure at the output terminal blocks - what is the AC current measurement?</p>
+<p>Also, see if you disconnect the actual transmission line from the meter&#8217;s output terminal blocks - does the residual load go away?  Or does the SC20 continue to measure a load even when you&#8217;ve physically disconnected the wires at the output terminal blocks for this circuit?  (always turn off circuit breakers in shed before handling terminal blocks.)</p>
+<p>If you&#8217;ve check all these different hardware options and verified that there is no real hardware load but it is definitely a software issue... another option is the SC20 is bad.</p>
+<p>Replace the SC20 with one of the spares, and test everything again.
+This happened in Pelengana too - I found one SC20 that was measuring a watt or two with no load - I replaced the SC20 and with the new SC20 there was no mystery load.</p>
+</div>
+<div class="section" id="i-cannot-ssh-into-the-meter-and-keep-getting-a-host-key-not-recognized-message-what-do-i-do">
+<h2>I cannot ssh into the meter and keep getting a &#8220;host key not recognized&#8221; message. What do I do?<a class="headerlink" href="#i-cannot-ssh-into-the-meter-and-keep-getting-a-host-key-not-recognized-message-what-do-i-do" title="Permalink to this headline">¶</a></h2>
+<p>On your computer, run <em>rm ~/.ssh/known_hosts</em></p>
+</div>
+<div class="section" id="the-clock-on-the-sheevaplug-is-way-off-how-can-i-set-it-to-the-current-date-time">
+<h2>The clock on the SheevaPlug is way off. How can I set it to the current date/time?<a class="headerlink" href="#the-clock-on-the-sheevaplug-is-way-off-how-can-i-set-it-to-the-current-date-time" title="Permalink to this headline">¶</a></h2>
+<p>First connect your computer to the plug-pc using ssh. There are two steps to update the SheevaPlug&#8217;s system time.</p>
+<ol class="arabic">
+<li><p class="first">Set the operating system clock to the correct date/time using the <tt class="docutils literal"><span class="pre">date</span></tt> command (and don&#8217;t forget the double-quotes around the date values).</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">date</span> <span class="pre">-s</span> <span class="pre">&quot;2011-08-23</span> <span class="pre">16:00:00&quot;</span></tt></p>
+<p>will set the date and time to:
+<tt class="docutils literal"><span class="pre">Tue</span> <span class="pre">Aug</span> <span class="pre">23</span> <span class="pre">16:00:00</span> <span class="pre">EDT</span> <span class="pre">2011</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">Set the hardware clock using the <tt class="docutils literal"><span class="pre">hwclock</span></tt> command.</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">hwclock</span> <span class="pre">--systohc</span></tt></p>
+<p>The hardware clock keeps the time when power is turned off, so be sure to do this for those cases. This is supposed to be run at shutdown automatically, but because we encounter sudden power outages so often, the system time will not sync with the hardware clock, resulting in wrong date/times on reboots.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="i-cannot-connect-to-the-sheevaplug-via-the-intranet-but-i-can-using-the-serialport">
+<h2>I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.<a class="headerlink" href="#i-cannot-connect-to-the-sheevaplug-via-the-intranet-but-i-can-using-the-serialport" title="Permalink to this headline">¶</a></h2>
+<p>Could be at least two reasons why you cannot connect from your computer.</p>
+<ol class="arabic">
+<li><p class="first">Your computer is not on the same subnet as the SheevaPlug. You might have been using your computer to surf the web before getting to the Plug. Setup your network with similar settings as the ones below:</p>
+<blockquote>
+<div><p>IP Address: 192.168.1.XYZ, where XYZ is a number in the range 150-180
+Netmask: 255.255.255.0
+Broadcast: 192.168.1.255</p>
+<p>Depending on the system you use, you may only need to set the IP Address.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Check the ethernet interface on the SheevaPlug using the command:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">/sbin/ifconfig</span></tt></p>
+<p>There should be an entry for &#8216;eth0&#8217;, and the inet address must be a static one - 192.168.1.101</p>
+<p>If you do not see an entry for &#8216;eth0&#8217;, then make sure the file <tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt> has the lines:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">allow-hotplug</span> <span class="pre">eth0</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">auto</span> <span class="pre">eth0</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">iface</span> <span class="pre">ssmeter</span> <span class="pre">inet</span> <span class="pre">static</span></tt></p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">address</span> <span class="pre">192.168.1.101</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">netmask</span> <span class="pre">255.255.255.0</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">broadcast</span> <span class="pre">192.168.1.255</span></tt></p>
+</div></blockquote>
+<p>If you had to edit the <tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt>, reboot the computer to test/ensure the changes take effect on startups [<tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">reboot</span></tt>].</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="network-messaging-troubleshooting-diagram">
+<h2>Network/Messaging troubleshooting diagram.<a class="headerlink" href="#network-messaging-troubleshooting-diagram" title="Permalink to this headline">¶</a></h2>
+<p>There will be times when the communications link needs to be checked at the site/meter - this will involve checking the modem and software status. The diagram below can serve as a flowchart the field technician can use as a guideline to solving the issue.</p>
+<img alt="_images/troubleshoot_nw_diagram.png" src="_images/troubleshoot_nw_diagram.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Current versions of <em>ssmeter</em> include a &#8216;Clear SMS&#8217; button for both the Critical and Non-critical queues. This will most likely be removed from future versions that would use values stored in a database to drive it.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Future <em>ssmeter</em> versions will also include support for a hardware component that powers ON the modem programmatically.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+
+    </ul>
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="http://readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:sharedsolar">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Troubleshooting at the Meter</a><ul>
+<li><a class="reference internal" href="#the-ssmeter-service-is-running-but-messages-are-not-getting-through-to-the-meter">The SSMeter service is running but messages are not getting through to the meter.</a></li>
+<li><a class="reference internal" href="#the-ssmeter-service-is-running-but-messages-are-not-being-sent-from-the-meter">The SSMeter service is running but messages are not being sent from the meter.</a></li>
+<li><a class="reference internal" href="#the-meter-is-running-was-sending-receiving-messages-but-i-m-not-sure-anymore-because-the-last-messages-occurred-sometime-ago-how-can-i-confirm-if-it-s-still-running-ok">The meter is running, was sending/receiving messages but I&#8217;m not sure anymore because the last messages occurred sometime ago. How can I confirm if it&#8217;s still running OK?</a></li>
+<li><a class="reference internal" href="#i-can-see-the-sms-message-queued-up-and-being-sent-out-but-i-don-t-see-them-arriving-at-the-gateway-what-do-i-do">I can see the SMS message queued up and being sent out, but I don&#8217;t see them arriving at the Gateway. What do I do?</a></li>
+<li><a class="reference internal" href="#the-credit-on-a-circuit-is-slowly-depleting-with-no-apparent-load-drawn-aka-sc20-reporting-use-without-any-load">The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).</a></li>
+<li><a class="reference internal" href="#i-cannot-ssh-into-the-meter-and-keep-getting-a-host-key-not-recognized-message-what-do-i-do">I cannot ssh into the meter and keep getting a &#8220;host key not recognized&#8221; message. What do I do?</a></li>
+<li><a class="reference internal" href="#the-clock-on-the-sheevaplug-is-way-off-how-can-i-set-it-to-the-current-date-time">The clock on the SheevaPlug is way off. How can I set it to the current date/time?</a></li>
+<li><a class="reference internal" href="#i-cannot-connect-to-the-sheevaplug-via-the-intranet-but-i-can-using-the-serialport">I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.</a></li>
+<li><a class="reference internal" href="#network-messaging-troubleshooting-diagram">Network/Messaging troubleshooting diagram.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="faq_ssmeter.html"
+                        title="previous chapter">FAQ: SSMeter</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/troubleshoot_ssmeter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="http://sharedsolar.readthedocs.org/en/latest/search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq_ssmeter.html" title="FAQ: SSMeter"
+             >previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, ModiLabs.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(http://media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="http://readthedocs.org/projects/sharedsolar/?fromdocs=sharedsolar" class="badge rtd">Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'None']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/troubleshoot_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:57 GMT -->
+</html>

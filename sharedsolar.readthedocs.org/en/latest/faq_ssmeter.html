@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/faq_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:55 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>FAQ: SSMeter &mdash; SharedSolar Technical .1 documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="../../../ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sharedsolar";
+  </script>
+  <script type="text/javascript" src="../../../media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="SharedSolar Technical .1 documentation" href="index.html" />
+    <link rel="next" title="Troubleshooting at the Meter" href="troubleshoot_ssmeter.html" />
+    <link rel="prev" title="SharedSolar Metering Software: Setup/Configuration Guide" href="setup_ssmeter.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="troubleshoot_ssmeter.html" title="Troubleshooting at the Meter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="setup_ssmeter.html" title="SharedSolar Metering Software: Setup/Configuration Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="faq-ssmeter">
+<h1>FAQ: SSMeter<a class="headerlink" href="#faq-ssmeter" title="Permalink to this headline">¶</a></h1>
+<p>In the descriptions below, the term <em>Plug-PC</em> denotes the computing platform used to host the <em>SSMeter</em> service. This could be a SheevaPlug, GuruPlug, DreamPlug, etc depending on what&#8217;s shipped and installed in the system.</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#how-should-i-assign-the-circuits-their-individual-ip-addresses">How should I assign the circuits their individual IP Addresses?</a></li>
+<li><a class="reference internal" href="#how-can-i-get-my-computer-onto-the-same-network-as-the-plug-pc-to-use-the-webmin-or-terminal-app">How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?</a></li>
+<li><a class="reference internal" href="#what-are-the-tasks-that-i-can-do-from-the-webmin">What are the tasks that I can do from the Webmin?</a></li>
+<li><a class="reference internal" href="#what-are-the-tasks-that-i-cannot-do-from-the-webmin">What are the tasks that I cannot do from the Webmin?</a></li>
+<li><a class="reference internal" href="#how-can-i-transfer-files-between-the-plug-pc-and-my-computer">How can I transfer files between the Plug-PC and my computer?</a></li>
+<li><a class="reference internal" href="#how-can-i-connect-to-the-plug-pc-using-my-computer-over-a-terminal-app">How can I connect to the Plug-PC using my computer over a Terminal app?</a></li>
+<li><a class="reference internal" href="#how-do-i-start-stop-restart-the-ssmeter-service">How do I start / stop / restart the SSMeter service?</a></li>
+<li><a class="reference internal" href="#how-do-i-connect-to-the-webmin">How do I connect to the Webmin?</a></li>
+<li><a class="reference internal" href="#how-do-i-flash-setup-the-wattsup-sc20-power-meters">How do I flash/setup the Wattsup SC20 power meters?</a></li>
+<li><a class="reference internal" href="#how-do-i-upgrade-the-ssmeter-service">How do I upgrade the SSMeter service?</a></li>
+<li><a class="reference internal" href="#how-do-i-turn-on-off-the-telit-modem">How do I turn ON/OFF the Telit modem?</a></li>
+<li><a class="reference internal" href="#how-do-i-know-the-modem-is-attached-to-the-network">How do I know the modem is attached to the network?</a></li>
+<li><a class="reference internal" href="#how-can-i-check-what-version-of-thread-ssmeter-py-is-installed">How can I check what version of thread_ssmeter.py is installed?</a></li>
+<li><a class="reference internal" href="#why-do-we-have-both-configuration-files-and-a-database-how-are-they-related">Why do we have both configuration files and a database? How are they related?</a></li>
+<li><a class="reference internal" href="#where-are-the-ssmeter-system-logs-stored-on-the-sheevaplug">Where are the ssmeter system logs stored on the SheevaPlug?</a></li>
+</ol>
+<div class="section" id="how-should-i-assign-the-circuits-their-individual-ip-addresses">
+<h2>How should I assign the circuits their individual IP Addresses?<a class="headerlink" href="#how-should-i-assign-the-circuits-their-individual-ip-addresses" title="Permalink to this headline">¶</a></h2>
+<p>The <em>SSMeter</em> service on the Plug-PC always has the IP Address <tt class="docutils literal"><span class="pre">192.168.1.101</span></tt>.</p>
+<p>Individual circuits follow the convention:</p>
+<ul class="simple">
+<li><em>Mains:</em> <tt class="docutils literal"><span class="pre">192.168.1.200</span></tt></li>
+<li><em>Consumer Circuits:</em> <tt class="docutils literal"><span class="pre">192.168.1.201</span></tt> .. <tt class="docutils literal"><span class="pre">192.168.1.255</span></tt></li>
+</ul>
+</div>
+<div class="section" id="how-can-i-get-my-computer-onto-the-same-network-as-the-plug-pc-to-use-the-webmin-or-terminal-app">
+<h2>How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?<a class="headerlink" href="#how-can-i-get-my-computer-onto-the-same-network-as-the-plug-pc-to-use-the-webmin-or-terminal-app" title="Permalink to this headline">¶</a></h2>
+<p>The Plug-PC is available at:</p>
+<ul class="simple">
+<li><em>IP Address:</em> <tt class="docutils literal"><span class="pre">192.168.1.101</span></tt></li>
+<li><em>Netmask:</em> <tt class="docutils literal"><span class="pre">255.255.255.0</span></tt></li>
+<li><em>Broadcast:</em> <tt class="docutils literal"><span class="pre">192.168.1.255</span></tt></li>
+</ul>
+<p>To be on the same network as the Plug-PC, follow the sequence:</p>
+<ol class="arabic simple">
+<li>Disconnect your computer from the internet</li>
+<li>Manually setup your IP address to be in the range <tt class="docutils literal"><span class="pre">192.168.1.105</span></tt> .. <tt class="docutils literal"><span class="pre">192.168.1.199</span></tt></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><em>Windows Users</em>: From <em>Control Panel</em> - <em>Network</em>.</li>
+<li><em>Mac Users</em>: From <em>System Preferences</em> - <em>Network</em>.</li>
+<li><em>Linux Users</em>: <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">ifconfig</span> <span class="pre">eth&lt;X&gt;</span> <span class="pre">&lt;ip_addr&gt;</span></tt></li>
+</ul>
+</div></blockquote>
+<p>To confirm that you can communicate with the Plug-PC, visit the <a class="reference external" href="http://192.168.1.101:9191/admin">Webmin</a>.</p>
+</div>
+<div class="section" id="what-are-the-tasks-that-i-can-do-from-the-webmin">
+<h2>What are the tasks that I can do from the Webmin?<a class="headerlink" href="#what-are-the-tasks-that-i-can-do-from-the-webmin" title="Permalink to this headline">¶</a></h2>
+<p>Using the <a class="reference external" href="http://192.168.1.101:9191/admin">Webmin</a>, you can do the following:</p>
+<ul class="simple">
+<li>Edit Meter configuration</li>
+<li>Edit Circuit configurations</li>
+<li>Edit Pricing Model Configurations</li>
+<li>View SMS Logs</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-tasks-that-i-cannot-do-from-the-webmin">
+<h2>What are the tasks that I cannot do from the Webmin?<a class="headerlink" href="#what-are-the-tasks-that-i-cannot-do-from-the-webmin" title="Permalink to this headline">¶</a></h2>
+<p>While most common tasks can be done via the <a class="reference external" href="http://192.168.1.101:9191/admin">Webmin</a>, there will be times when one needs to login to the Plug-PC using a terminal/file transfer app. Some of these include:</p>
+<ul class="simple">
+<li>Starting, stopping or restarting the service <em>[via Terminal]</em></li>
+<li>Flashing the Wattsup SC20 power meters <em>[via Terminal]</em></li>
+<li>Viewing the Meter logs <em>[via Terminal]</em></li>
+<li>Setting the Plug-PC&#8217;s date/time <em>[via Terminal]</em></li>
+<li>Upgrading the software <em>[via File Transfer Client]</em></li>
+<li>Manually transferring configuration files <em>[via File Transfer Client]</em></li>
+</ul>
+</div>
+<div class="section" id="how-can-i-transfer-files-between-the-plug-pc-and-my-computer">
+<h2>How can I transfer files between the Plug-PC and my computer?<a class="headerlink" href="#how-can-i-transfer-files-between-the-plug-pc-and-my-computer" title="Permalink to this headline">¶</a></h2>
+<p>The Plug-PC runs a <em>ssh</em> server available at:</p>
+<ul class="simple">
+<li><em>server:</em> <tt class="docutils literal"><span class="pre">192.168.1.101</span></tt></li>
+<li><em>user:</em> <tt class="docutils literal"><span class="pre">ssmeter</span></tt></li>
+</ul>
+<p>Please contact <em>sharedsolar-tech&#64;googlegroups.com</em> for the password.</p>
+<p>Use your preferred file transfer client to connect to this server. Some suggestions for clients are:</p>
+<ul class="simple">
+<li><em>Windows Users</em>: <a class="reference external" href="http://filezilla-project.org/download.php?type=client">FileZilla</a>.</li>
+<li><em>Mac Users</em>: <a class="reference external" href="http://cyberduck.ch/">CyberDuck</a>.</li>
+<li><em>Linux Users</em>: scp.</li>
+</ul>
+<p>Server credentials are the same for any of the approaches above.</p>
+<p>Both the <em>Windows</em> and <em>Mac</em> software should provide a intuitive, drag-n-drop interface to move files from your computer to the Plug-PC and vice-versa.</p>
+</div>
+<div class="section" id="how-can-i-connect-to-the-plug-pc-using-my-computer-over-a-terminal-app">
+<h2>How can I connect to the Plug-PC using my computer over a Terminal app?<a class="headerlink" href="#how-can-i-connect-to-the-plug-pc-using-my-computer-over-a-terminal-app" title="Permalink to this headline">¶</a></h2>
+<p>The Plug-PC runs a <em>ssh</em> server available at:</p>
+<ul class="simple">
+<li><em>server:</em> <tt class="docutils literal"><span class="pre">192.168.1.101</span></tt></li>
+<li><em>user:</em> <tt class="docutils literal"><span class="pre">ssmeter</span></tt></li>
+</ul>
+<p>Please contact <em>sharedsolar-tech&#64;googlegroups.com</em> for the password.</p>
+<ul class="simple">
+<li><em>Windows Users:</em> Use <a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">Putty</a>.</li>
+<li><em>Mac Users:</em> Use the <em>Terminal</em> app found in your Mac&#8217;s <em>Utilities</em> folder.</li>
+<li><em>Linux Users:</em> Use your terminal.</li>
+</ul>
+<dl class="docutils">
+<dt>Using one of the Terminal apps from above, enter:</dt>
+<dd><tt class="docutils literal"><span class="pre">ssh</span> <span class="pre">ssmeter&#64;192.168.1.101</span></tt></dd>
+</dl>
+<p>and the password to login.</p>
+</div>
+<div class="section" id="how-do-i-start-stop-restart-the-ssmeter-service">
+<h2>How do I start / stop / restart the SSMeter service?<a class="headerlink" href="#how-do-i-start-stop-restart-the-ssmeter-service" title="Permalink to this headline">¶</a></h2>
+<p>Using your Terminal app, enter one of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">/etc/init.d/ssmeter</span> <span class="pre">start</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">/etc/init.d/ssmeter</span> <span class="pre">stop</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">/etc/init.d/ssmeter</span> <span class="pre">restart</span></tt></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="how-do-i-connect-to-the-webmin">
+<h2>How do I connect to the Webmin?<a class="headerlink" href="#how-do-i-connect-to-the-webmin" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Visit the following (clickable) link from your browser:</dt>
+<dd><a class="reference external" href="http://192.168.1.101:9191/admin">http://192.168.1.101:9191/admin</a></dd>
+</dl>
+</div>
+<div class="section" id="how-do-i-flash-setup-the-wattsup-sc20-power-meters">
+<h2>How do I flash/setup the Wattsup SC20 power meters?<a class="headerlink" href="#how-do-i-flash-setup-the-wattsup-sc20-power-meters" title="Permalink to this headline">¶</a></h2>
+<p>This is a <strong>required</strong> step to assign the SC20 an IP Address and have it report circuit recordings to the <em>SSMeter</em> service. Additionally, this is the only task that needs to be performed outside of the <em>SSMeter</em> service and uses the Serial-USB port on the SC20.</p>
+<p>The script used to flash these meters is <em>SerialWUSC20Utility.py</em>, residing on the Plug-PC in the git repository folder:</p>
+<p><tt class="docutils literal"><span class="pre">/path/to/git/repo/sharedsolar/src/device/serial</span></tt></p>
+<p>To do this:</p>
+<ol class="arabic simple">
+<li>Connect the Serial-USB cable between the SC20 and your computer.</li>
+<li>Using the Terminal app, follow the sequence:<ol class="loweralpha">
+<li><tt class="docutils literal"><span class="pre">cd</span> <span class="pre">/path/to/git/repo/sharedsolar/src/device/serial</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">python</span> <span class="pre">SerialWUSC20Utility.py</span> <span class="pre">&lt;usb-port&gt;</span> <span class="pre">192.168.1.&lt;circuit-id&gt;</span> <span class="pre">192.168.1.101</span> <span class="pre">9090</span></tt>, where<ul>
+<li><em>&lt;usb-port&gt;</em> is the device port registered on your computer when the SC20 is connected serially, and</li>
+<li><em>&lt;circuit-id&gt;</em> is the IP Address you want assigned to the SC20. Follow the convention described in <a class="reference internal" href="#how-should-i-assign-the-circuits-their-individual-ip-addresses">How should I assign the circuits their individual IP Addresses?</a>.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Examples</strong>:</p>
+<p>If the Serial-USB port is registered on your computer at <tt class="docutils literal"><span class="pre">/dev/ttyUSB0</span></tt>:</p>
+<ul>
+<li><p class="first">To setup a SC20 that&#8217;s marked 12, enter:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">python</span> <span class="pre">SerialWUSC20Utility.py</span> <span class="pre">/dev/ttyUSB0</span> <span class="pre">192.168.1.212</span> <span class="pre">192.168.1.101</span> <span class="pre">9090</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">To setup a SC20 that&#8217;s marked 9, enter:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">python</span> <span class="pre">SerialWUSC20Utility.py</span> <span class="pre">/dev/ttyUSB0</span> <span class="pre">192.168.1.209</span> <span class="pre">192.168.1.101</span> <span class="pre">9090</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">To setup a SC20 that&#8217;s marked 20, enter:</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">python</span> <span class="pre">SerialWUSC20Utility.py</span> <span class="pre">/dev/ttyUSB0</span> <span class="pre">192.168.1.220</span> <span class="pre">192.168.1.101</span> <span class="pre">9090</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="how-do-i-upgrade-the-ssmeter-service">
+<h2>How do I upgrade the SSMeter service?<a class="headerlink" href="#how-do-i-upgrade-the-ssmeter-service" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The <em>SSMeter</em> service currently consists of a single file <tt class="docutils literal"><span class="pre">thread_ssmeter.py</span></tt>. This file typically resides on the Plug-PC in the directory:</dt>
+<dd><tt class="docutils literal"><span class="pre">/home/ssmeter/repo/sharedsolar/src/server/meter/</span></tt></dd>
+</dl>
+<p>Updates are typically pushed out via email to the group and each such email will mention a version number in the subject line. This version number in the subject line <strong>must</strong> match that at the top of the <tt class="docutils literal"><span class="pre">thread_ssmeter.py</span></tt> file that&#8217;s attached. If it does not match, please notify <em>sharedsolar-tech&#64;googlegroups.com</em> citing a version mismatch.</p>
+<p>To upgrade the software, follow the sequence:</p>
+<ol class="arabic simple">
+<li>Stop the running <em>SSMeter</em> service using the command listed in <a class="reference internal" href="#how-do-i-start-stop-restart-the-ssmeter-service">How do I start / stop / restart the SSMeter service?</a>.</li>
+<li>Copy the <tt class="docutils literal"><span class="pre">thread_ssmeter.py</span></tt> file to the location <tt class="docutils literal"><span class="pre">/home/ssmeter/repo/sharedsolar/src/server/meter/</span></tt>. To copy, refer to <a class="reference internal" href="#how-can-i-transfer-files-between-the-plug-pc-and-my-computer">How can I transfer files between the Plug-PC and my computer?</a></li>
+<li>Start the running <em>SSMeter</em> service using the command listed in <a class="reference internal" href="#how-do-i-start-stop-restart-the-ssmeter-service">How do I start / stop / restart the SSMeter service?</a>.</li>
+</ol>
+<p>Confirm the <em>SSMeter</em> service is running by visiting the Webmin page.</p>
+</div>
+<div class="section" id="how-do-i-turn-on-off-the-telit-modem">
+<h2>How do I turn ON/OFF the Telit modem?<a class="headerlink" href="#how-do-i-turn-on-off-the-telit-modem" title="Permalink to this headline">¶</a></h2>
+<p>Keep the <tt class="docutils literal"><span class="pre">ON/OFF</span></tt> button on the Telit depressed for about 3 seconds, and release.</p>
+</div>
+<div class="section" id="how-do-i-know-the-modem-is-attached-to-the-network">
+<h2>How do I know the modem is attached to the network?<a class="headerlink" href="#how-do-i-know-the-modem-is-attached-to-the-network" title="Permalink to this headline">¶</a></h2>
+<p>The Telit modem blinks at 3 second intervals when it&#8217;s attached to the network, 1 second intervals otherwise.</p>
+</div>
+<div class="section" id="how-can-i-check-what-version-of-thread-ssmeter-py-is-installed">
+<h2>How can I check what version of thread_ssmeter.py is installed?<a class="headerlink" href="#how-can-i-check-what-version-of-thread-ssmeter-py-is-installed" title="Permalink to this headline">¶</a></h2>
+<p>You can check what version of thread_ssmeter.py is installed in two ways.</p>
+<ol class="arabic">
+<li><p class="first">Using the Webmin - access the main/admin page at <a class="reference external" href="http://192.168.1.101:9191/admin">http://192.168.1.101:9191/admin</a> and the version number is displayed at the top-right corner of the webpage.</p>
+</li>
+<li><dl class="first docutils">
+<dt>By checking the installed file - login to the sheevaplug over ssh/screen. Run the command:</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">head</span> <span class="pre">/home/ssmeter/repo/sharedsolar/src/server/meter/thread_ssmeter.py</span></tt></p>
+<p class="last">The version number will be listed as the first line in the file.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="why-do-we-have-both-configuration-files-and-a-database-how-are-they-related">
+<h2>Why do we have both configuration files and a database? How are they related?<a class="headerlink" href="#why-do-we-have-both-configuration-files-and-a-database-how-are-they-related" title="Permalink to this headline">¶</a></h2>
+<p>On (re)starting the ssmeter process, the flow taken can be described by the psuedocode:</p>
+<dl class="docutils">
+<dt>ssmeter_start:</dt>
+<dd><dl class="first last docutils">
+<dt>if database /etc/ssmeter/ssmeter.db exists:</dt>
+<dd>load variables from ssmeter.db</dd>
+<dt>else:</dt>
+<dd>load variables from config files in /etc/sharedsolar</dd>
+</dl>
+</dd>
+</dl>
+<p>The else-clause exists because of possible situations when you need to debug database issues but would like to keep the service running. The logfile (ssmeter.log) might show it was a database snag (represented by any mention of &#8216;sqlite&#8217;), so the fallback in the above psuedocode allows you to just bypass the database altogether and load states into the ssmeter service using the plain-text config files.
+You bypass the database simply by deleting the ssmeter.db file - that&#8217;s it. Then update the config files with the desired values, and start the service.</p>
+<p>Note that once the config file values are loaded, it creates and populates the database, so subsequent restarts will initialize the system from the database only. This is fine.</p>
+<p>There&#8217;s no relationship between the database and config files once the database has been created, at which point, the files are never used.</p>
+<p>Another reason config files are there is because we don&#8217;t yet ship a &#8216;default&#8217; database, like how we used to ship the default config files. Ideally, someone would start the webmin with no sc20&#8217;s connected, and go through &#8216;Add new circuit&#8217; from the Webmin till they account for each. This is somewhat tedious, and can be made less so by having the defaults pre-loaded, but we don&#8217;t have it yet. But it shouldn&#8217;t matter because all you need to do is remove ssmeter.db and have everything load once from the config files. It might be easier for someone there to update plain-text files than a database.</p>
+</div>
+<div class="section" id="where-are-the-ssmeter-system-logs-stored-on-the-sheevaplug">
+<h2>Where are the ssmeter system logs stored on the SheevaPlug?<a class="headerlink" href="#where-are-the-ssmeter-system-logs-stored-on-the-sheevaplug" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">ssmeter</span></tt> system logs can be found at <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log</span></tt> on the SheevaPlug. These logs are rotated with the most recent in <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log</span></tt> and the oldest at <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log.10</span></tt> (there will be 10 archived logs each 1M in size.)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+
+    </ul>
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="http://readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:sharedsolar">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FAQ: SSMeter</a><ul>
+<li><a class="reference internal" href="#how-should-i-assign-the-circuits-their-individual-ip-addresses">How should I assign the circuits their individual IP Addresses?</a></li>
+<li><a class="reference internal" href="#how-can-i-get-my-computer-onto-the-same-network-as-the-plug-pc-to-use-the-webmin-or-terminal-app">How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?</a></li>
+<li><a class="reference internal" href="#what-are-the-tasks-that-i-can-do-from-the-webmin">What are the tasks that I can do from the Webmin?</a></li>
+<li><a class="reference internal" href="#what-are-the-tasks-that-i-cannot-do-from-the-webmin">What are the tasks that I cannot do from the Webmin?</a></li>
+<li><a class="reference internal" href="#how-can-i-transfer-files-between-the-plug-pc-and-my-computer">How can I transfer files between the Plug-PC and my computer?</a></li>
+<li><a class="reference internal" href="#how-can-i-connect-to-the-plug-pc-using-my-computer-over-a-terminal-app">How can I connect to the Plug-PC using my computer over a Terminal app?</a></li>
+<li><a class="reference internal" href="#how-do-i-start-stop-restart-the-ssmeter-service">How do I start / stop / restart the SSMeter service?</a></li>
+<li><a class="reference internal" href="#how-do-i-connect-to-the-webmin">How do I connect to the Webmin?</a></li>
+<li><a class="reference internal" href="#how-do-i-flash-setup-the-wattsup-sc20-power-meters">How do I flash/setup the Wattsup SC20 power meters?</a></li>
+<li><a class="reference internal" href="#how-do-i-upgrade-the-ssmeter-service">How do I upgrade the SSMeter service?</a></li>
+<li><a class="reference internal" href="#how-do-i-turn-on-off-the-telit-modem">How do I turn ON/OFF the Telit modem?</a></li>
+<li><a class="reference internal" href="#how-do-i-know-the-modem-is-attached-to-the-network">How do I know the modem is attached to the network?</a></li>
+<li><a class="reference internal" href="#how-can-i-check-what-version-of-thread-ssmeter-py-is-installed">How can I check what version of thread_ssmeter.py is installed?</a></li>
+<li><a class="reference internal" href="#why-do-we-have-both-configuration-files-and-a-database-how-are-they-related">Why do we have both configuration files and a database? How are they related?</a></li>
+<li><a class="reference internal" href="#where-are-the-ssmeter-system-logs-stored-on-the-sheevaplug">Where are the ssmeter system logs stored on the SheevaPlug?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="setup_ssmeter.html"
+                        title="previous chapter">SharedSolar Metering Software: Setup/Configuration Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="troubleshoot_ssmeter.html"
+                        title="next chapter">Troubleshooting at the Meter</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/faq_ssmeter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="http://sharedsolar.readthedocs.org/en/latest/search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="troubleshoot_ssmeter.html" title="Troubleshooting at the Meter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="setup_ssmeter.html" title="SharedSolar Metering Software: Setup/Configuration Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, ModiLabs.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(http://media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="http://readthedocs.org/projects/sharedsolar/?fromdocs=sharedsolar" class="badge rtd">Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'None']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/faq_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:55 GMT -->
+</html>

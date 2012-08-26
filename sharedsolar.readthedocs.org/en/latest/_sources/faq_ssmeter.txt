@@ -1,0 +1,213 @@
+FAQ: SSMeter
+************
+
+In the descriptions below, the term *Plug-PC* denotes the computing platform used to host the *SSMeter* service. This could be a SheevaPlug, GuruPlug, DreamPlug, etc depending on what's shipped and installed in the system.
+
+1. `How should I assign the circuits their individual IP Addresses?`_
+2. `How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?`_
+3. `What are the tasks that I can do from the Webmin?`_
+4. `What are the tasks that I cannot do from the Webmin?`_
+5. `How can I transfer files between the Plug-PC and my computer?`_
+6. `How can I connect to the Plug-PC using my computer over a Terminal app?`_
+7. `How do I start / stop / restart the SSMeter service?`_
+8. `How do I connect to the Webmin?`_
+9. `How do I flash/setup the Wattsup SC20 power meters?`_
+10. `How do I upgrade the SSMeter service?`_
+11. `How do I turn ON/OFF the Telit modem?`_
+12. `How do I know the modem is attached to the network?`_
+13. `How can I check what version of thread_ssmeter.py is installed?`_
+14. `Why do we have both configuration files and a database? How are they related?`_
+15. `Where are the ssmeter system logs stored on the SheevaPlug?`_
+
+How should I assign the circuits their individual IP Addresses?
+===============================================================
+The *SSMeter* service on the Plug-PC always has the IP Address ``192.168.1.101``.
+
+Individual circuits follow the convention:
+
+* *Mains:* ``192.168.1.200``
+* *Consumer Circuits:* ``192.168.1.201`` .. ``192.168.1.255``
+
+How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?
+=================================================================================================
+The Plug-PC is available at:
+
+* *IP Address:* ``192.168.1.101``
+* *Netmask:* ``255.255.255.0``
+* *Broadcast:* ``192.168.1.255``
+
+To be on the same network as the Plug-PC, follow the sequence:
+
+1. Disconnect your computer from the internet
+2. Manually setup your IP address to be in the range ``192.168.1.105`` .. ``192.168.1.199``
+  
+  * *Windows Users*: From *Control Panel* - *Network*.
+  * *Mac Users*: From *System Preferences* - *Network*.
+  * *Linux Users*: ``sudo ifconfig eth<X> <ip_addr>``
+
+To confirm that you can communicate with the Plug-PC, visit the `Webmin <http://192.168.1.101:9191/admin>`_.
+
+What are the tasks that I can do from the Webmin?
+=================================================
+Using the `Webmin <http://192.168.1.101:9191/admin>`_, you can do the following:
+
+* Edit Meter configuration 
+* Edit Circuit configurations
+* Edit Pricing Model Configurations
+* View SMS Logs 
+
+What are the tasks that I cannot do from the Webmin?
+==================================================== 
+While most common tasks can be done via the `Webmin <http://192.168.1.101:9191/admin>`_, there will be times when one needs to login to the Plug-PC using a terminal/file transfer app. Some of these include:
+
+* Starting, stopping or restarting the service *[via Terminal]*
+* Flashing the Wattsup SC20 power meters *[via Terminal]*
+* Viewing the Meter logs *[via Terminal]*
+* Setting the Plug-PC's date/time *[via Terminal]*
+* Upgrading the software *[via File Transfer Client]*
+* Manually transferring configuration files *[via File Transfer Client]*
+
+How can I transfer files between the Plug-PC and my computer?
+=============================================================
+The Plug-PC runs a *ssh* server available at:
+
+* *server:* ``192.168.1.101``
+* *user:* ``ssmeter``
+
+Please contact *sharedsolar-tech@googlegroups.com* for the password.
+
+Use your preferred file transfer client to connect to this server. Some suggestions for clients are:
+
+* *Windows Users*: `FileZilla <http://filezilla-project.org/download.php?type=client>`_.
+* *Mac Users*: `CyberDuck <http://cyberduck.ch/>`_.
+* *Linux Users*: scp.
+
+Server credentials are the same for any of the approaches above.
+
+Both the *Windows* and *Mac* software should provide a intuitive, drag-n-drop interface to move files from your computer to the Plug-PC and vice-versa.
+
+How can I connect to the Plug-PC using my computer over a Terminal app?
+=======================================================================
+The Plug-PC runs a *ssh* server available at:
+
+* *server:* ``192.168.1.101``
+* *user:* ``ssmeter``
+
+Please contact *sharedsolar-tech@googlegroups.com* for the password.
+
+* *Windows Users:* Use `Putty <http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>`_.
+* *Mac Users:* Use the *Terminal* app found in your Mac's *Utilities* folder.
+* *Linux Users:* Use your terminal.
+
+Using one of the Terminal apps from above, enter:
+      ``ssh ssmeter@192.168.1.101`` 
+
+and the password to login.
+
+How do I start / stop / restart the SSMeter service?
+====================================================
+Using your Terminal app, enter one of the following:
+
+      * ``sudo /etc/init.d/ssmeter start``
+      * ``sudo /etc/init.d/ssmeter stop``
+      * ``sudo /etc/init.d/ssmeter restart``
+
+How do I connect to the Webmin?
+===============================
+Visit the following (clickable) link from your browser:
+      `http://192.168.1.101:9191/admin <http://192.168.1.101:9191/admin>`_
+
+How do I flash/setup the Wattsup SC20 power meters?
+===================================================
+This is a **required** step to assign the SC20 an IP Address and have it report circuit recordings to the *SSMeter* service. Additionally, this is the only task that needs to be performed outside of the *SSMeter* service and uses the Serial-USB port on the SC20.
+
+The script used to flash these meters is *SerialWUSC20Utility.py*, residing on the Plug-PC in the git repository folder:
+
+``/path/to/git/repo/sharedsolar/src/device/serial``
+
+To do this:
+
+1. Connect the Serial-USB cable between the SC20 and your computer.
+2. Using the Terminal app, follow the sequence:
+
+   a. ``cd /path/to/git/repo/sharedsolar/src/device/serial``
+   b. ``python SerialWUSC20Utility.py <usb-port> 192.168.1.<circuit-id> 192.168.1.101 9090``, where
+
+      * *<usb-port>* is the device port registered on your computer when the SC20 is connected serially, and
+      * *<circuit-id>* is the IP Address you want assigned to the SC20. Follow the convention described in `How should I assign the circuits their individual IP Addresses?`_.
+
+**Examples**:
+
+If the Serial-USB port is registered on your computer at ``/dev/ttyUSB0``:
+
+* To setup a SC20 that's marked 12, enter:
+
+     ``python SerialWUSC20Utility.py /dev/ttyUSB0 192.168.1.212 192.168.1.101 9090``
+
+* To setup a SC20 that's marked 9, enter:
+
+     ``python SerialWUSC20Utility.py /dev/ttyUSB0 192.168.1.209 192.168.1.101 9090``
+
+* To setup a SC20 that's marked 20, enter:
+
+     ``python SerialWUSC20Utility.py /dev/ttyUSB0 192.168.1.220 192.168.1.101 9090``
+
+How do I upgrade the SSMeter service?
+=====================================
+The *SSMeter* service currently consists of a single file ``thread_ssmeter.py``. This file typically resides on the Plug-PC in the directory:
+    ``/home/ssmeter/repo/sharedsolar/src/server/meter/``
+
+Updates are typically pushed out via email to the group and each such email will mention a version number in the subject line. This version number in the subject line **must** match that at the top of the ``thread_ssmeter.py`` file that's attached. If it does not match, please notify *sharedsolar-tech@googlegroups.com* citing a version mismatch.
+
+To upgrade the software, follow the sequence:
+
+1. Stop the running *SSMeter* service using the command listed in `How do I start / stop / restart the SSMeter service?`_.
+2. Copy the ``thread_ssmeter.py`` file to the location ``/home/ssmeter/repo/sharedsolar/src/server/meter/``. To copy, refer to `How can I transfer files between the Plug-PC and my computer?`_
+3. Start the running *SSMeter* service using the command listed in `How do I start / stop / restart the SSMeter service?`_.
+
+Confirm the *SSMeter* service is running by visiting the Webmin page.
+
+How do I turn ON/OFF the Telit modem?
+=====================================
+Keep the ``ON/OFF`` button on the Telit depressed for about 3 seconds, and release.
+
+How do I know the modem is attached to the network?
+===================================================
+The Telit modem blinks at 3 second intervals when it's attached to the network, 1 second intervals otherwise.
+
+How can I check what version of thread_ssmeter.py is installed?
+===============================================================
+
+You can check what version of thread_ssmeter.py is installed in two ways.
+
+1. Using the Webmin - access the main/admin page at http://192.168.1.101:9191/admin and the version number is displayed at the top-right corner of the webpage.
+
+2. By checking the installed file - login to the sheevaplug over ssh/screen. Run the command:
+    ``head /home/ssmeter/repo/sharedsolar/src/server/meter/thread_ssmeter.py``
+
+    The version number will be listed as the first line in the file.
+
+Why do we have both configuration files and a database? How are they related?
+=============================================================================
+
+On (re)starting the ssmeter process, the flow taken can be described by the psuedocode:
+
+ssmeter_start:
+    if database /etc/ssmeter/ssmeter.db exists:
+        load variables from ssmeter.db
+    else:
+        load variables from config files in /etc/sharedsolar
+
+The else-clause exists because of possible situations when you need to debug database issues but would like to keep the service running. The logfile (ssmeter.log) might show it was a database snag (represented by any mention of 'sqlite'), so the fallback in the above psuedocode allows you to just bypass the database altogether and load states into the ssmeter service using the plain-text config files. 
+You bypass the database simply by deleting the ssmeter.db file - that's it. Then update the config files with the desired values, and start the service.
+
+Note that once the config file values are loaded, it creates and populates the database, so subsequent restarts will initialize the system from the database only. This is fine.
+
+There's no relationship between the database and config files once the database has been created, at which point, the files are never used.
+
+Another reason config files are there is because we don't yet ship a 'default' database, like how we used to ship the default config files. Ideally, someone would start the webmin with no sc20's connected, and go through 'Add new circuit' from the Webmin till they account for each. This is somewhat tedious, and can be made less so by having the defaults pre-loaded, but we don't have it yet. But it shouldn't matter because all you need to do is remove ssmeter.db and have everything load once from the config files. It might be easier for someone there to update plain-text files than a database. 
+
+Where are the ssmeter system logs stored on the SheevaPlug?
+=============================================================
+
+The ``ssmeter`` system logs can be found at ``/tmp/ssmeter.log`` on the SheevaPlug. These logs are rotated with the most recent in ``/tmp/ssmeter.log`` and the oldest at ``/tmp/ssmeter.log.10`` (there will be 10 archived logs each 1M in size.)

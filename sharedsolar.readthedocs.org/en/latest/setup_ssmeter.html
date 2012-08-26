@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/setup_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:30 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>SharedSolar Metering Software: Setup/Configuration Guide &mdash; SharedSolar Technical .1 documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="../../../ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sharedsolar";
+  </script>
+  <script type="text/javascript" src="../../../media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="SharedSolar Technical .1 documentation" href="index.html" />
+    <link rel="next" title="FAQ: SSMeter" href="faq_ssmeter.html" />
+    <link rel="prev" title="SharedSolar Technical Documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq_ssmeter.html" title="FAQ: SSMeter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="SharedSolar Technical Documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sharedsolar-metering-software-setup-configuration-guide">
+<h1>SharedSolar Metering Software: Setup/Configuration Guide<a class="headerlink" href="#sharedsolar-metering-software-setup-configuration-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section walks you through the various setup and tuning variables that can be configured from the Webmin. These are pre-requisites before commissioning the system and are meant to be performed in sequence listed below.</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#configure-consumer-accounts-on-the-gateway">Configure consumer accounts on the Gateway.</a></li>
+<li><a class="reference internal" href="#configure-the-tristar-mppt-60-solar-system-controllers">Configure the Tristar MPPT-60 Solar System Controllers.</a></li>
+<li><a class="reference internal" href="#configure-the-vendor-tablets">Configure the Vendor Tablets.</a></li>
+<li><a class="reference internal" href="#start-the-ssmeter-service">Start the ssmeter service.</a></li>
+<li><a class="reference internal" href="#configure-the-meter">Configure the Meter.</a></li>
+<li><a class="reference internal" href="#configure-the-pricing-models">Configure the Pricing Models.</a><ul>
+<li><a class="reference internal" href="#adding-new-pricing-models">Adding new Pricing Models.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configure-the-circuits">Configure the Circuits.</a><ul>
+<li><a class="reference internal" href="#adding-new-circuits">Adding new Circuits.</a></li>
+</ul>
+</li>
+</ol>
+<p>A screenshot of the Webmin&#8217;s main-page is below. It&#8217;s setup (in code) to be accessed at <a class="reference external" href="http://192.168.1.101:9191/admin">http://192.168.1.101:9191/admin</a> on the plug computer on which the SharedSolar software is running.</p>
+<p>There are three sections on the Webmin:</p>
+<ul class="simple">
+<li>View - you can check the PCU logs and the modem&#8217;s logs.</li>
+<li>Send SMS - you can use this to test your modem&#8217;s ability to send text messages, in conjunction with the View for the SMS Logs.</li>
+<li>Configure - from here you can make both the high- and low-level settings needed for the overall service (Configure - Meter), the individual circuits (Configure - Circuits) and the individual pricing models (Configure - Pricing Models).</li>
+</ul>
+<img alt="_images/main1.png" src="_images/main1.png" style="width: 800px; height: 640px;" />
+<div class="section" id="configure-consumer-accounts-on-the-gateway">
+<h2>Configure consumer accounts on the Gateway.<a class="headerlink" href="#configure-consumer-accounts-on-the-gateway" title="Permalink to this headline">¶</a></h2>
+<p>Before setting up the Metering software on the plug-pc&#8217;s, one needs to setup the SharedSolar Gateway for use with the meters. Briefly, the steps to be followed are:</p>
+<ol class="arabic simple">
+<li>Add a new Meter.</li>
+<li>Configure the new Meter.</li>
+<li>Add new consumer accounts for the Meter.</li>
+</ol>
+<p>Once the Gateway has been setup, note down the consumer account ID&#8217;s and their corresponding circuits. This mapping between the two will be needed in subsequent steps when <em>Circuits</em> are being configured (discussed below.)</p>
+</div>
+<div class="section" id="configure-the-tristar-mppt-60-solar-system-controllers">
+<h2>Configure the Tristar MPPT-60 Solar System Controllers.<a class="headerlink" href="#configure-the-tristar-mppt-60-solar-system-controllers" title="Permalink to this headline">¶</a></h2>
+<p>The Tristar MPPT-60 Solar System Controllers communicate using Modbus over TCP. For the SharedSolar metering software to access these devices, we need to assign static IP&#8217;s for these devices. This can be done both on the Tristar, as well as on the wireless router. For current purposes, we shall use the wireless router to assign the static IP to the MPPT-60. You can do this by following the steps below in the sequence listed.
+These assume a Netgear wireless router is being used, but please make the necessary changes if you&#8217;re using a different product.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These steps account for the case where a single MPPT-60 is involved. While you can have configurations with multiple MPPT-60&#8217;s, they will not be accessed by the Sharedsolar software. Please choose a single PCU that you&#8217;d like to receive the logs from. Future versions of the software will include support for multiple PCU&#8217;s, and this documentation will reflect the change, when implemented.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Visit the Netgear Wireless Router admin page at <em>http://192.168.1.1</em></p>
+</li>
+<li><p class="first">Under section &#8216;Advanced&#8217;, click on the link for &#8216;LAN Setup&#8217;.</p>
+</li>
+<li><p class="first">The last section should be &#8216;Address Reservation&#8217;, and that&#8217;s where we&#8217;ll setup the Tristar. The screenshot below shows what you should see at the end of the setup.</p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p class="first">Click on &#8216;Add&#8217;.</p>
+<blockquote>
+<div><p>You should see the Tristar listed among other devices - it&#8217;ll have a device name like &#8216;TSMPPT...&#8217;. And three input fields at the bottom, labelled &#8216;IP Address&#8217;, &#8216;MAC Address&#8217; and &#8216;Device Name&#8217;.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Enter 253 in the last &#8216;IP Address&#8217; field. So, IP address should read <em>192.168.1.253</em>.</p>
+</li>
+<li><p class="first">Copy the MAC Address for the Tristar from the list above to the field &#8216;MAC Address&#8217;.</p>
+</li>
+<li><p class="first">Copy the Device Name for the Tristar from the list above to the field &#8216;Device Name&#8217;.</p>
+</li>
+<li><p class="first">Hit &#8216;Add&#8217;.</p>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Restart Tristar.</p>
+</li>
+<li><p class="first">Confirm settings by visiting <em>http://192.168.1.253</em> . You should see the Tristar webpage.</p>
+</li>
+</ol>
+<img alt="_images/tristar_static_ip_setup.png" src="_images/tristar_static_ip_setup.png" style="width: 800px; height: 640px;" />
+</div>
+<div class="section" id="configure-the-vendor-tablets">
+<h2>Configure the Vendor Tablets.<a class="headerlink" href="#configure-the-vendor-tablets" title="Permalink to this headline">¶</a></h2>
+<p>Vendors can manage consumer accounts and add credit using a device running the SharedSolar Android app. Before the field-tech hands over the device to the Vendor, the following steps should be performed:</p>
+<ol class="arabic">
+<li><p class="first">Register the device at the SharedSolar Gateway.</p>
+</li>
+<li><p class="first">Assign a static IP for the device using the following steps:</p>
+<ol class="loweralpha simple">
+<li>Go to the Wi-Fi advanced settings on the tablet:<ul>
+<li>Push the menu button</li>
+<li>Touch Settings - Wireless &amp; network settings - Wi-Fi settings</li>
+<li>Push the menu button</li>
+<li>Touch Advanced</li>
+<li>You&#8217;ll see the MAC address.
+(Or open SharedSolar app and see the about page. The device ID is the MAC address)</li>
+</ul>
+</li>
+<li>In the wireless router admin page, click &#8220;LAN Setup&#8221; on the left panel. Click &#8220;Add&#8221; under &#8220;Address Reservation&#8221;.</li>
+<li>Input the following:<ul>
+<li>IP address: 192.168.1.222</li>
+<li>MAC address: the MAC address you see on the tablet. Ignore dots.</li>
+<li>Device Name: tablet</li>
+</ul>
+</li>
+<li>Click &#8220;Add&#8221; will take you to the previous page, and then click &#8220;Apply&#8221;.
+It&#8217;ll take 20 seconds to update.</li>
+<li>Disconnect and connect the tablet to the Wi-Fi.</li>
+</ol>
+</li>
+<li><p class="first">Authorize the device with the meters the Vendor will be servicing. This is done by the field-tech at the Meter/site.</p>
+<ol class="loweralpha">
+<li><p class="first">On the device, log onto the wireless network provided by the router at the site of interest.</p>
+</li>
+<li><p class="first">Access the field-tech menu using the <em>Home/Menu</em> button on the device. Login.</p>
+<a class="reference internal image-reference" href="_images/tech_login.png"><img alt="_images/tech_login.png" src="_images/tech_login.png" /></a>
+</li>
+<li><p class="first">Click on the button <em>Sync Device</em>. On success, the device will have been paired with the Meter and will be authorized for subsequent use.</p>
+<a class="reference internal image-reference" href="_images/tech_sync1.png"><img alt="_images/tech_sync1.png" src="_images/tech_sync1.png" /></a>
+<a class="reference internal image-reference" href="_images/tech_sync2.png"><img alt="_images/tech_sync2.png" src="_images/tech_sync2.png" /></a>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="start-the-ssmeter-service">
+<h2>Start the ssmeter service.<a class="headerlink" href="#start-the-ssmeter-service" title="Permalink to this headline">¶</a></h2>
+<p>Once the above steps have been performed, it&#8217;s time to start the SheevaPlug and the software service <tt class="docutils literal"><span class="pre">ssmeter</span></tt>. Power up the plug, and <tt class="docutils literal"><span class="pre">ssmeter</span></tt> will be started automatically. Booting might take a minute or two, and check for the running of the <tt class="docutils literal"><span class="pre">ssmeter</span></tt> service by visiting the webmin at <tt class="docutils literal"><span class="pre">http://192.168.1.101:9191/admin</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This assumes you&#8217;re on the same wireless network as that provided by the wireless router in the metering enclosure.</p>
+</div>
+<p>If you do not see the Webmin, check the <tt class="docutils literal"><span class="pre">ssmeter</span></tt> system logs that can be found at <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log</span></tt> on the SheevaPlug. These logs are rotated with the most recent in <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log</span></tt> and the oldest at <tt class="docutils literal"><span class="pre">/tmp/ssmeter.log.10</span></tt> (there will be 10 archived logs each 1M in size.)</p>
+</div>
+<div class="section" id="configure-the-meter">
+<h2>Configure the Meter.<a class="headerlink" href="#configure-the-meter" title="Permalink to this headline">¶</a></h2>
+<p>The field technician can configure all aspects of the Meter by accessing <em>Configure - Meter</em>. From here, you can make general settings like the Gateway&#8217;s phone number and performance tuning parameters like the cache times and frequencies of various operations. Most of these are for working with the WattsUp SC20 electricity meters. Also included are some parameters for use in <em>IP mode</em> - GPRS/data plan.</p>
+<p>To make any change, update the necessary fields and hit the <em>Update Meter</em> button at the bottom of the page.</p>
+<p>The parameters that we can set from here and their descriptions are:</p>
+<ul class="simple">
+<li><em>CACHE_TIME</em>: the amount of time (in seconds) that the meter will store logs in memory before writing out to the SD-card.</li>
+<li><em>FREQ_COMPONENT_FAILURE_CHECK</em>: the frequency (in seconds) between logs from a circuit before it&#8217;s flagged as not functioning. When a circuit is flagged, it triggers an alert SMS to be sent to the Gateway.</li>
+<li><em>FREQ_GATEWAY_JOB_REQUEST</em>: this is a parameter for use in <em>IP mode</em>. This is the frequency (in seconds) with which the Metering software will request for jobs from the Gateway. For eg: if it&#8217;s set at <em>10</em>, then the Metering software will check for new Gateway jobs every 10 seconds.</li>
+<li><em>FREQ_PRIMARY_PARAMETER_TRANSMISSION</em>: this is the frequency (in seconds) that the Metering software sends primary logs to the Gateway. For eg: setting it to 3600 will result in hourly log transmissions.</li>
+<li><em>GATEWAY</em>: this is the local phone number that the Gateway is assigned to in the country. This is the number that the meter sends the logs and alert messages to, as well as the number validated at the Meter when it receives a text message - if the number does not match, then it&#8217;s considered unauthorized and discarded. Due to the varying number formats (leading 0, + etc), it&#8217;s best to only include the minimal set of characters (the phone number) required to send out a text message from a phone.</li>
+<li><em>GPS_LATITUDE</em>: the location of the deployment - the GPS latitude (float).</li>
+<li><em>GPS_LONGITUDE</em>: the location of the deployment - the GPS longitude (float).</li>
+<li><em>IP_ADDRESS</em>: the IP address of the metering software to listen on. This is also the same IP that the SC20&#8217;s report on. Keep this at <em>192.168.1.101</em>.</li>
+<li><em>LOGS_HOME</em>: the home directory under which the SD-card log files will be written to. Current setup has this at - <em>/mnt/ssmeter/logs/</em></li>
+<li><em>LOW_CREDIT_THRESHOLD</em>: for each circuit/account, this is the credit level at/below which there will be an alert sent indicating the same.</li>
+<li><em>MODE</em>: the communications mode. There are only two options - <em>SMS</em> and <em>IP</em>. Please leave at <em>SMS</em> till <em>IP</em> is confirmed as operational.</li>
+<li><em>NAME</em>: the name of the deployment/site. This should match what was setup for this particular site on the Gateway.</li>
+<li><em>PERSIST_UPDATE_TIME</em>: A local database with a minimal set of values are stored on the plug-pc. These typically include the credit associated with each circuit, the total watt-hours consumed that day etc - values that are necessary to be loaded on service restarts to bring it back to a consistent state. This value is the frequency (in seconds) that the database is updated.</li>
+<li><em>PPPD_PEER</em>: this is a parameter for use in <em>IP mode</em>. It&#8217;s the pppd chat/handler scripts that the metering software accesses internally to help manage network connections. The value entered here should match the <em>/etc/chatscripts/&lt;your script here&gt;</em> filename (or its equivalent on other distro&#8217;s.)</li>
+</ul>
+<p>The meter configuration page looks like:</p>
+<img alt="_images/conf_meter.png" src="_images/conf_meter.png" style="width: 800px; height: 640px;" />
+</div>
+<div class="section" id="configure-the-pricing-models">
+<h2>Configure the Pricing Models.<a class="headerlink" href="#configure-the-pricing-models" title="Permalink to this headline">¶</a></h2>
+<p>Pricing Models can be developed, configured and applied per consumer circuit/account from the Webmin.</p>
+<p>To make any change, update the necessary fields and hit the <em>Update Model</em> button at the bottom of the page.</p>
+<p>The parameters that we can set from here and their descriptions are:</p>
+<ul class="simple">
+<li><em>BASELINE_RATE</em>:</li>
+<li><em>DAY_MULT</em>: for time-of-day pricing. Day time multiplier.</li>
+<li><em>ENERGY_HIGH_MULT</em>: energy-consumption pricing. Multiplier used when consumption exceeds the threshold value set in <em>ENERGY_THRESHOLD</em>.</li>
+<li><em>ENERGY_LOW_MULT</em>: energy-consumption pricing. Multiplier used when consumption is below the threshold value set in <em>ENERGY_THRESHOLD</em>.</li>
+<li><em>ENERGY_THRESHOLD</em>: Used for energy-consumption pricing. Threshold (in watt-hours) between the low/high consumption values.</li>
+<li><em>MODELID</em>: integer identifier for the pricing model. This is later cross-referenced when you&#8217;re setting up a <em>Circuit</em> and need to associate it with this pricing model.</li>
+<li><em>NAME</em>: A human-readable name for this model.</li>
+<li><em>NIGHT_MULT</em>: for time-of-day pricing. Night time multiplier.</li>
+<li><em>POWER_HIGH</em>: used for power-level pricing. Threshold (in watts) for devices drawing a load higher than this value.</li>
+<li><em>POWER_HIGH_MULT</em>: power-level pricing. Multiplier used when load exceeds the threshold value set in <em>POWER_HIGH</em>.</li>
+<li><em>POWER_LOW</em>: used for power-level pricing. Threshold (in watts) for devices drawing a load higher than this value.</li>
+<li><em>POWER_LOW_MULT</em>: power-level pricing. Multiplier used when load exceeds the threshold value set in <em>POWER_LOW</em>.</li>
+<li><em>POWER_MID_MULT</em>: power-level pricing. Multiplier used when load drawn is in the range between <em>POWER_LOW</em> and <em>POWER_HIGH</em>.</li>
+<li><em>TIME_DAY_START</em>: used for time-of-day pricing. The time in &#8216;HH:MM:SS&#8217; format indicating the start of the day.</li>
+<li><em>TIME_NIGHT_START</em>: used for time-of-day pricing. The time in &#8216;HH:MM:SS&#8217; format indicating the start of night-time.</li>
+</ul>
+<p>The equation to express the rate of energy credit utilization, during a given pricing state, is shown below:</p>
+<div class="highlight-python"><pre>a = b * c * (d_n * p_n * e_n)
+
+where,
+* a is the amount of energy credit spent in units of [CURRENCY],
+* b is the baseline pricing value in units of [CURRENCY]/kWh ,
+* c is the energy utilized in units of Watt-hours,
+* d_n is the time of day multiplier as determined by the Pricing-Matrix,
+* p_n is the power multiplier as determined by Pricing-Matrix, and
+* e_n is the energy multiplier as determined by Pricing-Matrix.</pre>
+</div>
+<p>Below are two examples of possible use scenarios further detailing pricing. These examples assume the following multiplier values:
+<em>d1 = 1</em>
+, <em>d2 = 1.5</em>
+, <em>p1 = 1</em>
+, <em>p2 = 1.5</em>
+, <em>p3 = 2</em>
+, <em>e1 = 1</em>
+, <em>e2 = 1.5</em>
+, and a baseline pricing of <em>b = 1 x [CURRENCY]/Wh</em>
+.</p>
+<p>Daytime low load, base pricing: A consumer used 80 watt hours between 9am and 11am, at a max loading of 40 watts. This then cost them 80 XOF of credit. (Note, they did not exceed the allowed 200 watt-hour base energy threshold.)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">d_n</span> <span class="o">*</span> <span class="n">p_n</span> <span class="o">*</span> <span class="n">e_n</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">80</span>
+</pre></div>
+</div>
+<p>Nighttime high load pricing: A consumer used a 600 watt hours between 7pm and 10pm, at a consistant loading of 200 watts. This then will cost 2400 XOF of energy-credit (for the first 200 watt-hours its baseline pricing x3, because there is a x2 multiplier for nighttime pricing plus a x2 multiplier for High load pricing which totals a x5 multiplier; multipliers are additive; during the second two hours of consumption there is an additional x1 multiplier because the consumer has exceeded the 200 watt-hour daily base-line limit).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">d_n</span> <span class="o">*</span> <span class="n">p_n</span> <span class="o">*</span> <span class="n">e_n</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">400</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">2400</span>
+</pre></div>
+</div>
+<p>The pricing model configuration page looks like:</p>
+<img alt="_images/conf_model.png" src="_images/conf_model.png" style="width: 800px; height: 640px;" />
+</div>
+<div class="section" id="adding-new-pricing-models">
+<h2>Adding new Pricing Models.<a class="headerlink" href="#adding-new-pricing-models" title="Permalink to this headline">¶</a></h2>
+<p>The user interface (UI) presented to add a new pricing model mirrors that of the configuration UI.</p>
+<p>The Webmin page to add a new pricing model is:</p>
+<img alt="_images/add_model.png" src="_images/add_model.png" style="width: 800px; height: 640px;" />
+</div>
+<div class="section" id="configure-the-circuits">
+<h2>Configure the Circuits.<a class="headerlink" href="#configure-the-circuits" title="Permalink to this headline">¶</a></h2>
+<p>Individual circuits and account properties can be configured by the field technician from the <em>Configure - Circuits - Circuit_ID</em> link. There are two types of Circuits, and the differences are noted in the comment on <em>TYPE</em> below.</p>
+<p>To make any change, update the necessary fields and hit the <em>Update Circuit</em> button at the bottom of the page.</p>
+<p>The parameters that we can set from here and their descriptions are:</p>
+<ul class="simple">
+<li><em>ACCOUNT_NUMBER</em>: This should match the consumer account number on the Gateway that this SC20 associated with.</li>
+<li><em>ACTIVE</em>: Signifies whether the relay is ON/OFF. Valid values are 0 for OFF, and 1 for ON.</li>
+<li><em>CIRCUITID</em>: The circuit ID, which is translated into an IP Address for the SC20&#8217;s in the range 192.168.1.2XX, where XX is the <em>CIRCUITID</em>.</li>
+<li><em>ENERGY_MAX</em>: The energy (in watt-hours) available for the consumer.</li>
+<li><em>NUM_WARNING_SIGNALS</em>: Defunct.</li>
+<li><em>POWER_MAX</em>: The maximum load (in watts) that a consumer can draw at any given point in time.</li>
+<li><em>PRICING_MODEL</em>: The ID (integer) of the pricing model in effect at this circuit. This must match one of the Pricing Models already setup.</li>
+<li><em>SERIAL</em>: The serial number of the SC20. This is an optional field, but should not be left empty.</li>
+<li><em>TYPE</em>: There are two valid values for this field - <em>MAINS</em> and <em>CIRCUIT</em>. The differences between a <em>MAINS</em> AND a <em>CIRCUIT</em> are:<ul>
+<li><em>MAINS</em> is typically on 192.168.1.200</li>
+<li><em>MAINS</em> will not switch OFF if the <em>ACTIVE</em> field is set to 0.</li>
+<li><em>MAINS</em> will not switch OFF if <em>ENERGY_MAX</em> and <em>POWER_MAX</em> are hit.</li>
+<li>The <em>CREDIT</em> value for <em>MAINS</em> is not used, as it&#8217;s not connected to a consumer.</li>
+</ul>
+</li>
+<li><em>CREDIT</em>: The credit balance on this account (float).</li>
+</ul>
+<p>The circuit configuration page looks like:</p>
+<img alt="_images/conf_ckt.png" src="_images/conf_ckt.png" style="width: 800px; height: 640px;" />
+</div>
+<div class="section" id="adding-new-circuits">
+<h2>Adding new Circuits.<a class="headerlink" href="#adding-new-circuits" title="Permalink to this headline">¶</a></h2>
+<p>The user interface (UI) presented to add a new circuit mirrors that of the configuration UI. The pre-requisite is to create an account on the Gateway so that you can enter that value when you&#8217;re creating the new circuit.</p>
+<p>The Webmin page to add a new circuit is:</p>
+<img alt="_images/add_ckt.png" src="_images/add_ckt.png" style="width: 800px; height: 640px;" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+
+    </ul>
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="http://readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:sharedsolar">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SharedSolar Metering Software: Setup/Configuration Guide</a><ul>
+<li><a class="reference internal" href="#configure-consumer-accounts-on-the-gateway">Configure consumer accounts on the Gateway.</a></li>
+<li><a class="reference internal" href="#configure-the-tristar-mppt-60-solar-system-controllers">Configure the Tristar MPPT-60 Solar System Controllers.</a></li>
+<li><a class="reference internal" href="#configure-the-vendor-tablets">Configure the Vendor Tablets.</a></li>
+<li><a class="reference internal" href="#start-the-ssmeter-service">Start the ssmeter service.</a></li>
+<li><a class="reference internal" href="#configure-the-meter">Configure the Meter.</a></li>
+<li><a class="reference internal" href="#configure-the-pricing-models">Configure the Pricing Models.</a></li>
+<li><a class="reference internal" href="#adding-new-pricing-models">Adding new Pricing Models.</a></li>
+<li><a class="reference internal" href="#configure-the-circuits">Configure the Circuits.</a></li>
+<li><a class="reference internal" href="#adding-new-circuits">Adding new Circuits.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">SharedSolar Technical Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="faq_ssmeter.html"
+                        title="next chapter">FAQ: SSMeter</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/setup_ssmeter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="http://sharedsolar.readthedocs.org/en/latest/search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq_ssmeter.html" title="FAQ: SSMeter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="SharedSolar Technical Documentation"
+             >previous</a> |</li>
+        <li><a href="index.html">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, ModiLabs.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(http://media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="http://readthedocs.org/projects/sharedsolar/?fromdocs=sharedsolar" class="badge rtd">Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'None']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/setup_ssmeter.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:55 GMT -->
+</html>

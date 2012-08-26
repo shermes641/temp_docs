@@ -1,0 +1,141 @@
+Troubleshooting at the Meter
+****************************
+Described below are some common cases encountered at the meter.
+
+1. `The SSMeter service is running but messages are not getting through to the meter.`_
+2. `The SSMeter service is running but messages are not being sent from the meter.`_
+3. `The meter is running, was sending/receiving messages but I'm not sure anymore because the last messages occurred sometime ago. How can I confirm if it's still running OK?`_
+4. `I can see the SMS message queued up and being sent out, but I don't see them arriving at the Gateway. What do I do?`_
+5. `The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).`_
+6. `I cannot ssh into the meter and keep getting a "host key not recognized" message. What do I do?`_
+7. `The clock on the SheevaPlug is way off. How can I set it to the current date/time?`_
+8. `I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.`_
+9. `Network/Messaging troubleshooting diagram.`_
+
+The SSMeter service is running but messages are not getting through to the meter.
+=================================================================================
+Send a text message from a phone to the meter and check the SMS Logs page on the webmin to see if it arrives. Give it 5 minutes.
+
+In case it does arrive, then double-check that the Gateway indeed sent out the message. If the message was sent, then check the aggregator/telco logs to see where it is in the chain.
+
+The SSMeter service is running but messages are not being sent from the meter.
+==============================================================================
+* Make sure the modem's associated with the network - the Telit's LED should be blinking at 3 second intervals. 
+* Check the Webmin's SMS Logs page and confirm that the queued messages are indeed being sent to the modem, instead of being stuck at a particular one. 
+* If messages are being sent out to the modem from the queue, make sure the SIM card has credit on it. 
+
+The meter is running, was sending/receiving messages but I'm not sure anymore because the last messages occurred sometime ago. How can I confirm if it's still running OK?
+==========================================================================================================================================================================
+Send a text message from your phone directly to the meter, with the content of the SMS being ``hello meter``. If the meter/modem is functioning, then you should receive a response SMS containing ``hello <your_phone_number>``.
+
+I can see the SMS message queued up and being sent out, but I don't see them arriving at the Gateway. What do I do?
+===================================================================================================================
+The point of failure might lie either with the *localsms* solution or the *kannel* server. 
+
+* From the Webmin's Meter Configuration webpage, change the Gateway's phone number to your personal cellphone.
+
+  * Send a text message from your cellphone to the Meter. Confirm the message arrival by checking the SMS Logs on the Webmin
+  * Restart the SSMeter service. This will send a notification from the Meter to your phone.
+
+  If both the above tests pass, contact *sharedsolar-tech@googlegroups.com* and ask to check the *localsms* and *kannel* solutions.
+
+The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).
+==================================================================================================================
+Thanks to MichaelBenedict for the question and MattBasinger for the response.
+
+The first thing is to verify there is indeed absolutely no load and that this is for sure a software issue:
+
+Monitor the "power" from the webmin with the household circuit activated (CB at the house) and the lights on and any other applicable load on? What is this load at the SC20 via the webmin?
+
+When you turn off the breaker at the household - what is the residual load you are trying to identify?  (how many watts)
+
+Or if you can't access the "power" (watts) via the current version of the webmin you have - then just watch the watthours decrease over a several minute period, time it, and calculate the power.
+
+Also, use the current clamp (orange) multimeter that ivan brought you... with the household breaker turned off, put the multimeter clamp around the hot wire in the enclosure at the output terminal blocks - what is the AC current measurement?
+
+Also, see if you disconnect the actual transmission line from the meter's output terminal blocks - does the residual load go away?  Or does the SC20 continue to measure a load even when you've physically disconnected the wires at the output terminal blocks for this circuit?  (always turn off circuit breakers in shed before handling terminal blocks.)
+
+If you've check all these different hardware options and verified that there is no real hardware load but it is definitely a software issue... another option is the SC20 is bad.
+
+Replace the SC20 with one of the spares, and test everything again.
+This happened in Pelengana too - I found one SC20 that was measuring a watt or two with no load - I replaced the SC20 and with the new SC20 there was no mystery load.
+
+I cannot ssh into the meter and keep getting a "host key not recognized" message. What do I do?
+===============================================================================================
+On your computer, run *rm ~/.ssh/known_hosts*
+
+The clock on the SheevaPlug is way off. How can I set it to the current date/time?
+==================================================================================
+First connect your computer to the plug-pc using ssh. There are two steps to update the SheevaPlug's system time.
+
+1. Set the operating system clock to the correct date/time using the ``date`` command (and don't forget the double-quotes around the date values).
+
+    ``sudo date -s "2011-08-23 16:00:00"``
+    
+    will set the date and time to:
+    ``Tue Aug 23 16:00:00 EDT 2011``
+
+2. Set the hardware clock using the ``hwclock`` command.
+
+    ``sudo hwclock --systohc``
+
+    The hardware clock keeps the time when power is turned off, so be sure to do this for those cases. This is supposed to be run at shutdown automatically, but because we encounter sudden power outages so often, the system time will not sync with the hardware clock, resulting in wrong date/times on reboots.
+
+I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.
+====================================================================================
+Could be at least two reasons why you cannot connect from your computer.
+
+1. Your computer is not on the same subnet as the SheevaPlug. You might have been using your computer to surf the web before getting to the Plug. Setup your network with similar settings as the ones below:
+
+    IP Address: 192.168.1.XYZ, where XYZ is a number in the range 150-180
+    Netmask: 255.255.255.0
+    Broadcast: 192.168.1.255
+
+    Depending on the system you use, you may only need to set the IP Address.
+
+2. Check the ethernet interface on the SheevaPlug using the command:
+
+    ``/sbin/ifconfig``
+
+    There should be an entry for 'eth0', and the inet address must be a static one - 192.168.1.101
+
+    If you do not see an entry for 'eth0', then make sure the file ``/etc/network/interfaces`` has the lines:
+
+        ``allow-hotplug eth0``
+
+        ``auto eth0``
+
+        ``iface ssmeter inet static``
+
+            ``address 192.168.1.101``
+
+            ``netmask 255.255.255.0``
+
+            ``broadcast 192.168.1.255``
+
+        If you had to edit the ``/etc/network/interfaces``, reboot the computer to test/ensure the changes take effect on startups [``sudo reboot``].
+
+Network/Messaging troubleshooting diagram.
+==========================================
+There will be times when the communications link needs to be checked at the site/meter - this will involve checking the modem and software status. The diagram below can serve as a flowchart the field technician can use as a guideline to solving the issue.
+
+.. image:: /images/troubleshoot_nw_diagram.png
+
+..
+  .. graphviz::
+
+     digraph troubleshooting_network {
+     "Confirm\nSIM is active" -> "Confirm network\nreachable via phone.";
+     "Confirm network\nreachable via phone." -> "Modem\npowered ON"
+     "Modem\npowered ON" -> "Check SMS Logs\non Webmin" [label = "blink frq\n>=3s", color = "#00ff00"];
+     "Modem\npowered ON" -> "Restart Modem" [label = "blink frq\n< 3s", color = "#ff0000"];
+     "Restart Modem" -> "Confirm\nSIM is active";
+     "Check SMS Logs\non Webmin" -> "Confirm\nmessage reception." [label = "Queues not\nbacked up"];
+     "Check SMS Logs\non Webmin" -> "'/etc/init.d/ssmeter restart'\non the SheevaPlug" [label = "Queues\nbacked up"];
+     "'/etc/init.d/ssmeter restart'\non the SheevaPlug" -> "Restart Modem";
+     "Confirm\nmessage reception." [shape="box"];
+     }
+
+.. note:: Current versions of *ssmeter* include a 'Clear SMS' button for both the Critical and Non-critical queues. This will most likely be removed from future versions that would use values stored in a database to drive it.
+
+.. note:: Future *ssmeter* versions will also include support for a hardware component that powers ON the modem programmatically.

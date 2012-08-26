@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/index.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:23 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>SharedSolar Technical Documentation &mdash; SharedSolar Technical .1 documentation</title>
+<!-- RTD <head> -->
+<script type="text/javascript" src="../../../ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/searchtools.js"></script>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+  <script type="text/javascript">
+    var doc_version = "latest";
+    var doc_slug = "sharedsolar";
+  </script>
+  <script type="text/javascript" src="../../../media.readthedocs.org/javascript/rtd.js"></script>
+<!-- end RTD <head> -->
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <link rel="top" title="SharedSolar Technical .1 documentation" href="#" />
+    <link rel="next" title="SharedSolar Metering Software: Setup/Configuration Guide" href="setup_ssmeter.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="setup_ssmeter.html" title="SharedSolar Metering Software: Setup/Configuration Guide"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sharedsolar-technical-documentation">
+<h1>SharedSolar Technical Documentation<a class="headerlink" href="#sharedsolar-technical-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup_ssmeter.html">SharedSolar Metering Software: Setup/Configuration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-consumer-accounts-on-the-gateway">Configure consumer accounts on the Gateway.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-the-tristar-mppt-60-solar-system-controllers">Configure the Tristar MPPT-60 Solar System Controllers.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-the-vendor-tablets">Configure the Vendor Tablets.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#start-the-ssmeter-service">Start the ssmeter service.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-the-meter">Configure the Meter.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-the-pricing-models">Configure the Pricing Models.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#adding-new-pricing-models">Adding new Pricing Models.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#configure-the-circuits">Configure the Circuits.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_ssmeter.html#adding-new-circuits">Adding new Circuits.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq_ssmeter.html">FAQ: SSMeter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-should-i-assign-the-circuits-their-individual-ip-addresses">How should I assign the circuits their individual IP Addresses?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-can-i-get-my-computer-onto-the-same-network-as-the-plug-pc-to-use-the-webmin-or-terminal-app">How can I get my computer onto the same network as the Plug-PC to use the Webmin or Terminal app?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#what-are-the-tasks-that-i-can-do-from-the-webmin">What are the tasks that I can do from the Webmin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#what-are-the-tasks-that-i-cannot-do-from-the-webmin">What are the tasks that I cannot do from the Webmin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-can-i-transfer-files-between-the-plug-pc-and-my-computer">How can I transfer files between the Plug-PC and my computer?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-can-i-connect-to-the-plug-pc-using-my-computer-over-a-terminal-app">How can I connect to the Plug-PC using my computer over a Terminal app?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-start-stop-restart-the-ssmeter-service">How do I start / stop / restart the SSMeter service?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-connect-to-the-webmin">How do I connect to the Webmin?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-flash-setup-the-wattsup-sc20-power-meters">How do I flash/setup the Wattsup SC20 power meters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-upgrade-the-ssmeter-service">How do I upgrade the SSMeter service?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-turn-on-off-the-telit-modem">How do I turn ON/OFF the Telit modem?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-do-i-know-the-modem-is-attached-to-the-network">How do I know the modem is attached to the network?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#how-can-i-check-what-version-of-thread-ssmeter-py-is-installed">How can I check what version of thread_ssmeter.py is installed?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#why-do-we-have-both-configuration-files-and-a-database-how-are-they-related">Why do we have both configuration files and a database? How are they related?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq_ssmeter.html#where-are-the-ssmeter-system-logs-stored-on-the-sheevaplug">Where are the ssmeter system logs stored on the SheevaPlug?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshoot_ssmeter.html">Troubleshooting at the Meter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#the-ssmeter-service-is-running-but-messages-are-not-getting-through-to-the-meter">The SSMeter service is running but messages are not getting through to the meter.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#the-ssmeter-service-is-running-but-messages-are-not-being-sent-from-the-meter">The SSMeter service is running but messages are not being sent from the meter.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#the-meter-is-running-was-sending-receiving-messages-but-i-m-not-sure-anymore-because-the-last-messages-occurred-sometime-ago-how-can-i-confirm-if-it-s-still-running-ok">The meter is running, was sending/receiving messages but I&#8217;m not sure anymore because the last messages occurred sometime ago. How can I confirm if it&#8217;s still running OK?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#i-can-see-the-sms-message-queued-up-and-being-sent-out-but-i-don-t-see-them-arriving-at-the-gateway-what-do-i-do">I can see the SMS message queued up and being sent out, but I don&#8217;t see them arriving at the Gateway. What do I do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#the-credit-on-a-circuit-is-slowly-depleting-with-no-apparent-load-drawn-aka-sc20-reporting-use-without-any-load">The credit on a circuit is slowly depleting with no apparent load drawn (aka SC20 reporting use without any load).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#i-cannot-ssh-into-the-meter-and-keep-getting-a-host-key-not-recognized-message-what-do-i-do">I cannot ssh into the meter and keep getting a &#8220;host key not recognized&#8221; message. What do I do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#the-clock-on-the-sheevaplug-is-way-off-how-can-i-set-it-to-the-current-date-time">The clock on the SheevaPlug is way off. How can I set it to the current date/time?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#i-cannot-connect-to-the-sheevaplug-via-the-intranet-but-i-can-using-the-serialport">I cannot connect to the SheevaPlug via the intranet, but I can using the serialport.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot_ssmeter.html#network-messaging-troubleshooting-diagram">Network/Messaging troubleshooting diagram.</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+
+
+    <h3>Project Versions</h3>
+    <ul id="sidebar_versions">
+
+  <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+
+    </ul>
+<div id="searchbox" style="">
+  <h3>RTD Search</h3>
+    <form class="search" action="http://readthedocs.org/search/project/" method="get">
+      <input type="text" name="q" size="18">
+      <input type="submit" value="Go">
+      <input type="hidden" name="selected_facets" value="project:sharedsolar">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+        Full-text doc search.
+    </p>
+</div>
+
+
+
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SharedSolar Technical Documentation</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="setup_ssmeter.html"
+                        title="next chapter">SharedSolar Metering Software: Setup/Configuration Guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="http://sharedsolar.readthedocs.org/en/latest/search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="setup_ssmeter.html" title="SharedSolar Metering Software: Setup/Configuration Guide"
+             >next</a> |</li>
+        <li><a href="#">SharedSolar Technical .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, ModiLabs.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+ <!-- End original user content -->
+
+
+
+<style type="text/css">
+  .badge {
+    position: fixed;
+    display: block;
+    bottom: 5px;
+    height: 40px;
+    text-indent: -9999em;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+  #version_menu {
+    position: fixed;
+    display: none;
+    bottom: 11px;
+    right: 166px;
+    list-style-type: none;
+    margin: 0;
+  }
+  .footer_popout:hover #version_menu {
+    display: block;
+  }
+  #version_menu li {
+    display: block;
+    float: right;
+  }
+  #version_menu li a {
+    display: block;
+    padding: 6px 10px 4px 10px;
+    margin: 7px 7px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #fff;
+    background: #8ca1af url(../images/gradient-light.png) bottom left repeat-x;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 1px 1px #465158;
+    -moz-box-shadow: 0 1px 1px #465158;
+    -webkit-box-shadow: 0 1px 1px #465158;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  #version_menu li a:hover {
+    text-decoration: none;
+    background-color: #697983;
+    box-shadow: 0 1px 0px #465158;
+    -moz-box-shadow: 0 1px 0px #465158;
+    -webkit-box-shadow: 0 1px 0px #465158;
+  }
+  .badge.rtd {
+    background: #257597 url(http://media.readthedocs.org/images/badge-rtd.png) top left no-repeat;
+    border: 1px solid #282E32;
+    width: 160px;
+    right: 5px;
+  }
+  .badge.revsys { background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline-sponsored {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 290px;
+    right: 173px;
+  }
+  .badge.revsys-inline {
+    position: inherit;
+    margin-left: auto;
+    margin-right: 175px;
+    margin-bottom: 5px;
+    background: #465158 url(http://media.readthedocs.org/images/badge-revsys-sm.png) top left no-repeat;
+    border: 1px solid #1C5871;
+    width: 205px;
+    right: 173px;
+  }
+
+.rtd_doc_footer { background-color: #465158;}
+
+</style>
+<div class="rtd_doc_footer">
+  <div class="footer_popout">
+    <a href="http://readthedocs.org/projects/sharedsolar/?fromdocs=sharedsolar" class="badge rtd">Brought to you by Read the Docs</a>
+    <ul id="version_menu">
+      
+        <li><a href="http://readthedocs.org/docs/sharedsolar/en/latest/">latest</a></li>
+      
+    </ul>
+  </div>
+</div>
+<!-- RTD Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- User Analytics Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'None']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+
+<!-- Mirrored from sharedsolar.readthedocs.org/en/latest/index.html by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 25 Aug 2012 17:49:27 GMT -->
+</html>
